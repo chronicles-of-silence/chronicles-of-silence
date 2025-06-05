@@ -13,7 +13,7 @@
       font-size: 1.15rem;
       line-height: 1.6;
       background-color: #fff;
-      overflow: hidden;
+      
       
     }
 
@@ -102,7 +102,7 @@
       });
 
       if (allCorrect) {
-        window.top.location.href = decodeURL(encodedURL);
+        window.open(decodeURL(encodedURL), '_blank');
       } else {
         document.getElementById('result').textContent = "Not quite right. Try again :)";
       }
