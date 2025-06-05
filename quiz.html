@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Gate</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question label {
+      display: block;
+      margin-left: 1rem;
+    }
+
+    #submit {
+      padding: 0.6rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    #result {
+      margin-top: 1rem;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Answer All Correctly to Proceed</h1>
+
+  <div class="question" data-answer="b">
+    <p>1. What is the capital of France?</p>
+    <label><input type="radio" name="q1" value="a"> Berlin</label>
+    <label><input type="radio" name="q1" value="b"> Paris</label>
+    <label><input type="radio" name="q1" value="c"> Rome</label>
+  </div>
+
+  <div class="question" data-answer="c">
+    <p>2. What is 2 + 2?</p>
+    <label><input type="radio" name="q2" value="a"> 3</label>
+    <label><input type="radio" name="q2" value="b"> 5</label>
+    <label><input type="radio" name="q2" value="c"> 4</label>
+  </div>
+
+  <div class="question" data-answer="a">
+    <p>3. Which is a fruit?</p>
+    <label><input type="radio" name="q3" value="a"> Banana</label>
+    <label><input type="radio" name="q3" value="b"> Carrot</label>
+    <label><input type="radio" name="q3" value="c"> Broccoli</label>
+  </div>
+
+  <button id="submit">Submit</button>
+  <div id="result"></div>
+
+  <script>
+    const submitBtn = document.getElementById('submit');
+    const resultDiv = document.getElementById('result');
+
+    // The "secret" URL, Base64 encoded to hide it from casual view
+    const encodedURL = 'aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ=='; // "https://www.google.com"
+
+    function decodeURL(base64) {
+      return atob(base64);
+    }
+
+    submitBtn.addEventListener('click', () => {
+      const questions = document.querySelectorAll('.question');
+      let allCorrect = true;
+
+      questions.forEach((question, i) => {
+        const selected = question.querySelector('input[type="radio"]:checked');
+        const correct = question.dataset.answer;
+        if (!selected || selected.value !== correct) {
+          allCorrect = false;
+        }
+      });
+
+      if (allCorrect) {
+        const url = decodeURL(encodedURL);
+        window.location.href = url;
+      } else {
+        resultDiv.textContent = "Oops! Not all answers are correct.";
+      }
+    });
+  </script>
+</body>
+</html>
