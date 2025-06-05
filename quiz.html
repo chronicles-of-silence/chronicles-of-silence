@@ -13,6 +13,8 @@
       font-size: 1.15rem;
       line-height: 1.6;
       background-color: #fff;
+      overflow: hidden;
+      
     }
 
     .question {
@@ -100,7 +102,7 @@
       });
 
       if (allCorrect) {
-        window.location.href = decodeURL(encodedURL);
+        window.top.location.href = decodeURL(encodedURL);
       } else {
         document.getElementById('result').textContent = "Not quite right. Try again :)";
       }
